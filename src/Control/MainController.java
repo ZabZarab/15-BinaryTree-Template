@@ -5,6 +5,8 @@ import View.DrawingPanel;
 import View.TreeView.TreeNode;
 import View.TreeView.TreePath;
 
+import java.sql.SQLOutput;
+
 /**
  * Created by Jean-Pierre on 12.01.2017.
  */
@@ -61,12 +63,12 @@ public class MainController {
             TreeNode node = new TreeNode(startX, startY, 10, tree.getContent().toString(), false);
             panel.addObject(node);
             if(!tree.getLeftTree().isEmpty()){
-                showTree(tree.getLeftTree() , panel ,startX-spaceToTheSide , startY + 50 , spaceToTheSide/2);
+                showTree(tree.getLeftTree() , panel ,startX-spaceToTheSide , startY + 60 , spaceToTheSide/2);
                 TreePath leftPath = new TreePath(startX , startY, startX-spaceToTheSide, startY + 40, 2 , false );
                 panel.addObject(leftPath);
             }
             if(!tree.getRightTree().isEmpty()){
-                showTree(tree.getRightTree() , panel ,startX+spaceToTheSide , startY + 50 , spaceToTheSide/2);
+                showTree(tree.getRightTree() , panel ,startX+spaceToTheSide , startY + 60 , spaceToTheSide/2);
                 TreePath rightPath = new TreePath(startX , startY, startX+spaceToTheSide, startY + 40, 2 , false );
                 panel.addObject(rightPath);
             }
@@ -92,9 +94,22 @@ public class MainController {
      */
     private String traverse(BinaryTree tree){
         //TODO 04: Nachdem wir geklärt haben, was eine Traversierung ist, muss diese Methode noch vervollständigt werden. Sollte ein Kinderspiel sein.
-        return "Traverse? Wat dat denn?";
+
+        // Inorder:
+
+        String output = "";
+       if(!tree.getLeftTree().isEmpty()){
+           output += traverse(tree.getLeftTree());
+        }
+       output += tree.getContent().toString();
+        if(!tree.getRightTree().isEmpty()){
+            output += traverse(tree.getRightTree());
+        }
+
+        return output;
+
     }
-	
+
     /**
      * Interne Übungsmethode zur Traversierung.
      * @param tree Der zu traversierende Binärbaum.
