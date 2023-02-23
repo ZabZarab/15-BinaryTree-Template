@@ -117,6 +117,8 @@ public class MainController {
      */
     private int countNodes(BinaryTree tree){
         //TODO 05: Übungsmethode
-	return 0;
+        if(tree.getLeftTree().isEmpty()) return 0;
+        return 1 + countNodes(tree.getLeftTree()) + countNodes(tree.getRightTree()) ;
+
     }
 }
